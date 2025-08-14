@@ -40,6 +40,10 @@ validated independently before moving to the next stage.
      configurations in a grid search.
    - Useful for quickly exploring hold times, queue positions and entry
      modes to locate profitable regions.
+7. **Support/Resistance Study** – `pipeline.sr_analysis`
+   - Derives per-minute support and resistance from the mid price.
+   - Tags events that occur near these levels and summarises order-flow
+     behaviour for contextual edge research.
 
 ## Usage
 
