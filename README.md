@@ -18,6 +18,7 @@ The command above loads data, builds signals and runs a queue based
 backtest.  Resulting events and trade summaries are written to the
 `outputs` directory.
 
+
 To focus on regular trading hours (e.g. 10:00–14:00 ET) add the
 `--rth-only` flag:
 
@@ -32,6 +33,7 @@ Explore multiple parameter combinations in batch with the sweep utility:
 python -m pipeline.sweep path/to/db sweep_results \
     --hold-secs 1,3,5 --queue-pos 5,10 --entry-modes maker,taker
 ```
+
 
 ## Disclaimer
 

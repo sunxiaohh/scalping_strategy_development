@@ -7,6 +7,7 @@ from typing import Tuple, Optional
 import pandas as pd
 from zoneinfo import ZoneInfo
 
+
 from event_driven_strategy import load_topstep_data, reconstruct_order_book_with_depth
 
 
@@ -73,4 +74,5 @@ def filter_rth(
     local_ts = events["ts"].dt.tz_convert(ZoneInfo(tz))
     mask = (local_ts.dt.hour >= start_hour) & (local_ts.dt.hour < end_hour)
     return events.loc[mask].reset_index(drop=True)
+
 

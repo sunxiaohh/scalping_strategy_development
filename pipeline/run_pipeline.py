@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from .data import load_raw_events, filter_rth
+
 from .explore import basic_stats
 from .signals import build_signals
 from .backtest import run_backtest
@@ -25,6 +26,7 @@ def run(args: argparse.Namespace) -> None:
             end_hour=args.rth_end,
             tz=args.tz,
         )
+
     stats = basic_stats(events)
     if not stats:
         print("No events loaded; aborting.")
@@ -72,6 +74,7 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--rth-start", type=int, default=10, dest="rth_start", help="RTH start hour in tz")
     ap.add_argument("--rth-end", type=int, default=14, dest="rth_end", help="RTH end hour (exclusive) in tz")
     ap.add_argument("--tz", default="America/New_York", help="Timezone for RTH filtering")
+
     return ap
 
 

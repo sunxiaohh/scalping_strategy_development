@@ -32,8 +32,7 @@ validated independently before moving to the next stage.
 5. **Orchestration** – `pipeline.run_pipeline`
    - Command line entry point that ties the above steps together and
      writes events, trades and summary statistics to an output folder.
-   - Supports filtering to regular trading hours via `--rth-only` and
-     custom timezone/hour ranges.
+
 
 6. **Parameter Sweep** – `pipeline.sweep.run_sweep`
    - Loads events/signals once and evaluates multiple backtest
@@ -45,6 +44,7 @@ validated independently before moving to the next stage.
    - Tags events that occur near these levels and summarises order-flow
      behaviour for contextual edge research.
 
+
 ## Usage
 
 ```bash
@@ -55,8 +55,6 @@ python -m pipeline.run_pipeline <path-to-db> output_dir \
 Each module can also be imported independently for iterative research in
 interactive environments or notebooks.
 
-To batch test combinations of parameters:
-
 ```bash
 python -m pipeline.sweep path/to/db sweep_out \
     --start 2025-08-11T13:00:00Z --end 2025-08-11T14:00:00Z \
@@ -64,6 +62,7 @@ python -m pipeline.sweep path/to/db sweep_out \
 ```
 
 Results are saved to `sweep_out/sweep_results.csv` for further analysis.
+
 
 ## Next Steps
 
