@@ -33,6 +33,18 @@ validated independently before moving to the next stage.
    - Command line entry point that ties the above steps together and
      writes events, trades and summary statistics to an output folder.
 
+
+6. **Parameter Sweep** – `pipeline.sweep.run_sweep`
+   - Loads events/signals once and evaluates multiple backtest
+     configurations in a grid search.
+   - Useful for quickly exploring hold times, queue positions and entry
+     modes to locate profitable regions.
+7. **Support/Resistance Study** – `pipeline.sr_analysis`
+   - Derives per-minute support and resistance from the mid price.
+   - Tags events that occur near these levels and summarises order-flow
+     behaviour for contextual edge research.
+
+
 ## Usage
 
 ```bash
@@ -42,6 +54,15 @@ python -m pipeline.run_pipeline <path-to-db> output_dir \
 
 Each module can also be imported independently for iterative research in
 interactive environments or notebooks.
+
+```bash
+python -m pipeline.sweep path/to/db sweep_out \
+    --start 2025-08-11T13:00:00Z --end 2025-08-11T14:00:00Z \
+    --hold-secs 1,3,5 --queue-pos 5,10 --entry-modes maker,taker
+```
+
+Results are saved to `sweep_out/sweep_results.csv` for further analysis.
+
 
 ## Next Steps
 
