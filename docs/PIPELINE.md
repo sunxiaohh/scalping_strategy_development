@@ -1,0 +1,53 @@
+# Event-Driven Scalping Research Pipeline
+
+This repository provides a minimal yet extendable pipeline for building
+and backtesting event-driven scalping strategies.  The design follows a
+"think big, do small" philosophy: every step is modular and can be
+validated independently before moving to the next stage.
+
+## Steps
+
+1. **Data Loading** – `pipeline.data.load_raw_events`
+   - Reads the raw Topstep DuckDB files and reconstructs per-event order
+     book snapshots.
+   - Output: DataFrame with best bid/ask, volumes, trade-through and
+     cancel statistics.
+
+2. **Exploratory Analysis** – `pipeline.explore.basic_stats`
+   - Computes lightweight descriptive statistics used by human scalpers.
+   - Intended for sanity checks before feature engineering.
+
+3. **Signal Construction** – `pipeline.signals.build_signals`
+   - Applies event-based primitives (break-outs, vacuum cancels and
+     aggressor imbalance) to produce directional signals and edge
+     estimates.
+   - Parameters mirror those used by experienced discretionary traders
+     and can be tuned for different markets.
+
+4. **Backtesting** – `pipeline.backtest.run_backtest`
+   - Simulates queue-based execution using the generated signals.
+   - Supports maker, taker and hybrid entries with configurable
+     protections.
+
+5. **Orchestration** – `pipeline.run_pipeline`
+   - Command line entry point that ties the above steps together and
+     writes events, trades and summary statistics to an output folder.
+
+## Usage
+
+```bash
+python -m pipeline.run_pipeline <path-to-db> output_dir \
+    --start 2025-08-11T13:00:00Z --end 2025-08-11T14:00:00Z
+```
+
+Each module can also be imported independently for iterative research in
+interactive environments or notebooks.
+
+## Next Steps
+
+- Perform deeper statistical validation on generated signals.
+- Experiment with alternative event primitives or machine-learning based
+  scoring models.
+- Integrate brokerage execution or paper trading to move from research
+  to deployment.
+
